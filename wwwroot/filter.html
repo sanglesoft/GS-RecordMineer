@@ -1,0 +1,271 @@
+﻿<!doctype html>
+<html lang="En-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="theme-color" content="#2B2B35">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="css/plugins/bootstrap-extended.min.css">
+    <link rel="stylesheet" href="css/plugins/font-awesome.min.css">
+    <link rel="stylesheet" href="css/plugins/all.min.css">
+    <link rel="stylesheet" href="css/plugins/swiper.min.css">
+    <link rel="stylesheet" href="css/plugins/fancybox.min.css">
+    <link rel="stylesheet" href="css/plugins/jquery.toast.min.css">
+    <link rel="stylesheet" href="css/plugins/tiny-date-picker.css">
+    <link rel="stylesheet" href="css/plugins/date-range-picker.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>GS Record Mining</title>
+</head>
+
+<body>
+    <div class="art-app art-app-onepage">
+        <div class="art-mobile-top-bar"></div>
+        <div class="art-app-wrapper">
+            <div class="art-app-container">
+                <div class="art-info-bar">
+                    <div class="art-info-bar-frame">
+                        <div class="art-info-bar-header">
+                            <div class="art-info-bar-btn">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </div>
+                        </div>
+                        <div class="art-header">
+                            <div class="art-avatar">
+                                <a data-no-swup class="art-avatar-curtain">
+                                    <img src="img/GS.png" alt="avatar">
+                                    <i class="fas fa-expand"></i>
+                                </a>
+                            </div>
+                            <h5 class="art-name mb-10">GS Record Mining</h5>
+                            <div class="art-sm-text"></div>
+                        </div>
+                        <div id="scrollbar2" class="art-scroll-frame">
+                            <div class="art-applications">
+
+                            </div>
+                            <div class="art-ls-divider"></div>
+                            <div class="art-links-frame p-15-15">
+                                <a class="art-link" data-no-swup data-toggle="modal" data-target="#setting-modal">
+                                    <i class="fa fa-cog"></i> Setting
+                                </a>
+                            </div>
+                        </div>
+                        <div class="art-ls-social">
+                            <a href="#" class="art-link" data-no-swup>
+                                © 2021 KISS™ Solution
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="art-content">
+                    <div class="art-curtain"></div>
+                    <div class="art-top-bg">
+                        <div class="art-top-bg-overlay"></div>
+                    </div>
+                    <div class="transition-fade" id="swup">
+                        <div class="container-fluid">
+                            <div class="row justify-content-lg-center
+                                        justify-content-md-center">
+                                <div class="col-12">
+                                    <div class="art-a art-card">
+                                        <h4 class="mb-25"> Grandstream UCM Record Mining </h4>
+                                        <form id="formFilter" class="art-contact-form">
+                                            <hr />
+                                            <div class="row timeRange">
+                                                <div class="col-12 col-lg-6">
+
+                                                    <div class="art-form-field">
+                                                        <input id="Start"
+                                                               name="Start"
+                                                               class="art-input" autocomplete="off"
+                                                               type="text"
+                                                               placeholder="Start">
+                                                        <label for="Start"><i class="fas fa-calendar-days fa-2x"></i></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="art-form-field">
+                                                        <input id="End"
+                                                               name="End"
+                                                               class="art-input" autocomplete="off"
+                                                               type="text"
+                                                               placeholder="End">
+                                                        <label for="End"><i class="fas fa-calendar-days fa-2x"></i></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="ex-inputs-picker"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row numberInOut">
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="art-form-field">
+                                                        <input id="From"
+                                                               name="From"
+                                                               class="art-input" autocomplete="off"
+                                                               type="text"
+                                                               placeholder="From">
+                                                        <label for="From"><i class="fas fa-phone fa-2x"></i></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="art-form-field">
+                                                        <input id="To"
+                                                               name="To"
+                                                               class="art-input" autocomplete="off"
+                                                               type="text"
+                                                               placeholder="To">
+                                                        <label for="To"><i class="fas fa-phone-flip fa-2x"></i></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="art-submit-frame text-right">
+                                                <button class="art-btn
+                                                            art-btn-md
+                                                            art-submit w-100"
+                                                        type="button"
+                                                        id="btn-filter-submit">
+                                                    <i class="fa fa-magnifying-glass"></i>
+                                                    <span></span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="scrollbar" class="art-scroll-frame">
+                            <div class="container-fluid">
+                                <div class="row justify-content-lg-center justify-content-md-center">
+                                    <div class="col-12">
+                                        <div class="art-a art-card card-application p-0">
+                                            <table class="table
+                                                    table-bordered m-0"
+                                                   id="table-filter">
+                                                <thead>
+                                                    <tr>
+                                                        <th>From</th>
+                                                        <th>To</th>
+                                                        <th>Time</th>
+                                                        <th>Duration</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="art-preloader">
+            <div class="art-preloader-content">
+                <h4>GS Record Mining</h4>
+                <div id="preloader" class="art-preloader-load"></div>
+            </div>
+        </div>
+    </div>
+    <div id="swupMenu"></div>
+    <!-- Modal -->
+    <div class="modal fade overcover" id="setting-modal" tabindex="-1" role="dialog" aria-labelledby="setting-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="art-a art-card">
+                    <h4 class="mb-25" id="setting-modal-label"> NAS setting </h4>
+                    <form id="form-connect" class="art-contact-form">
+                        <div class="row">
+                            <div class="col-12 art-form-field">
+                                <input id="form-connect-host" name="Host"
+                                       class="art-input" autocomplete="off"
+                                       type="text"
+                                       placeholder="Host">
+                                <label for="form-connect-host"><i class="fas fa-server fa-2x"></i></label>
+                            </div>
+                            <div class="col-12 art-form-field">
+                                <input id="form-connect-sharename"
+                                       name="Sharename"
+                                       class="art-input" autocomplete="off"
+                                       type="text"
+                                       placeholder="Sharename">
+                                <label for="form-connect-sharename"><i class="fas fa-share fa-2x"></i></label>
+                            </div>
+                            <div class="col-12 art-form-field">
+                                <input id="form-connect-username" name="Username"
+                                       class="art-input" autocomplete="off"
+                                       type="text"
+                                       placeholder="Username">
+                                <label for="form-connect-username"><i class="fas fa-user fa-2x"></i></label>
+                            </div>
+                            <div class="col-12 art-form-field">
+                                <input id="form-connect-password"
+                                       name="Password"
+                                       class="art-input" autocomplete="off"
+                                       type="text"
+                                       placeholder="Password">
+                                <label for="form-connect-password"><i class="fas fa-key fa-2x"></i></label>
+                            </div>
+                            <div class="col-12 art-submit-frame">
+                                <button class="art-btn art-btn-md art-submit w-100" data-dismiss="modal" type="button" id="btn-connect-submit">
+                                    <i class="fa fa-link"></i>
+                                    <span>Connect and build indexed</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade overcover" data-keyboard="false" data-backdrop="static" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="art-a art-card">
+                    <h4 class="mb-25">
+                        Login 
+                    </h4>
+                    <form id="form-login" class="art-contact-form">
+                        <div class="art-form-field">
+                            <input id="form-login-alias" autocomplete="off" name="Alias" class="art-input" type="text" placeholder="Username">
+                            <label for="form-login-alias"><i class="fas fa-user"></i></label>
+                        </div>
+                        <div class="art-form-field">
+                            <input id="form-login-password" autocomplete="off" name="Password" class="art-input" type="password" placeholder="Password">
+                            <label for="form-login-password"><i class="fas fa-key"></i></label>
+                        </div>
+                        <div class="art-submit-frame text-right">
+                            <button class="art-btn art-btn-md art-submit w-100" type="button" id="btn-submit-login"><span>Login</span></button>
+                            <div class="art-success">Success <i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="art-buttons-frame p-3 text-center"><a href="#" class="art-link art-color-link art-w-chevron">or need a help</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/plugins/jquery.min.js"></script>
+    <script src="js/plugins/popper.min.js"></script>
+    <script src="js/plugins/bootstrap.min.js"></script>
+    <script src="js/plugins/anime.min.js"></script>
+    <script src="js/plugins/swiper.min.js"></script>
+    <script src="js/plugins/progressbar.min.js"></script>
+    <script src="js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="js/plugins/overscroll.min.js"></script>
+    <script src="js/plugins/fancybox.min.js"></script>
+    <script src="js/plugins/jquery.toast.min.js"></script>
+    <script src="js/plugins/swup.min.js"></script>
+    <script src="js/plugins/moment-with-locales.min.js"></script>
+    <script src="js/plugins/date-range-picker.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
