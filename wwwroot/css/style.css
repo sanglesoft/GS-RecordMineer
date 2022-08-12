@@ -1043,12 +1043,12 @@ blockquote {
                 }
 
 .art-info-bar .art-applications {
-    min-height: calc(100vh - 351px);
+    min-height: calc(100vh - 379px);
 }
 @media (max-width: 920px)
 {
     .art-info-bar .art-applications {
-        min-height: calc(100vh - 321px);
+        min-height: calc(100vh - 341px);
     }
 }
 .art-info-bar .art-applications .art-applications-item {

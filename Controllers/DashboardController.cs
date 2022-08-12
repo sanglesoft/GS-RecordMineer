@@ -24,11 +24,6 @@ namespace GSRecordMining.Controllers
         {
             return Redirect("~/filter.html");
         }
-        public IActionResult LogIn()
-        {
-            ViewBag.RequestPath = HttpContext.Request.Query["RequestPath"].ToString();
-            return View();
-        }
         
         [HttpPost]
         public async Task<JsonResult> verifyLogin(Models.SystemUser systemUser)
@@ -56,10 +51,10 @@ namespace GSRecordMining.Controllers
         {
             return Json(User.Identity.IsAuthenticated);
         }
-        public async Task<IActionResult> LogOut()
+        public async Task<JsonResult> LogOut()
         {
             await HttpContext.SignOutAsync("GSRecordMining");
-            return RedirectToAction("LogIn");
+            return Json(true);
         }
 
         [Authorize]

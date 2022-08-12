@@ -242,7 +242,8 @@ $(document).ready(function () {
                         showHideTransition: 'slide',
                         position: 'bottom-right',
                         afterHidden: function () {
-                            
+                            $("#form-login-alias").val("");
+                            $("#form-login-password").val("");
                         }
                     });
                     $.ajax({
@@ -265,7 +266,7 @@ $(document).ready(function () {
                 }
                 else {
                     $.toast({
-                        heading: "[Error " + (result.statusCode / 10) + "x] Login failed",
+                        heading: "[Error " + (result.statusCode) + "] Login failed",
                         text: result.message + (result.data != "" ? ("<br>" + JSON.stringify(result.data)) : ""),
                         icon: 'error',
                         showHideTransition: 'slide',
@@ -321,7 +322,7 @@ $(document).ready(function () {
                             }
                             else {
                                 $.toast({
-                                    heading: "[Error " + (result.statusCode / 10) + "x] get data failed",
+                                    heading: "[Error " + (result.statusCode) + "] get data failed",
                                     text: result.message + (result.data != "" ? ("<br>" + JSON.stringify(result.data)) : ""),
                                     icon: 'error',
                                     showHideTransition: 'slide',
@@ -385,6 +386,22 @@ $(document).ready(function () {
         filltableFilter();
         $("#btn-filter-submit").prop("disabled", false);
         
+    });
+    $("#setting-logout").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "/LogOut",
+            success: function () {
+                
+                    $('#login-modal').modal({ backdrop: 'static', keyboard: false });
+                
+            },
+            error: function (result) {
+
+            },
+            complete: function () {
+            }
+        });
     });
 
 });
