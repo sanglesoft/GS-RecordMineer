@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseKestrel();
 builder.WebHost.UseIIS();
 builder.WebHost.UseIISIntegration();
-builder.WebHost.UseUrls("https://*:4388");
+builder.WebHost.UseUrls("http://*:4388");
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
@@ -42,7 +42,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto
 });
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
