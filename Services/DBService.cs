@@ -1,6 +1,7 @@
 ﻿using GSRecordMining.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace GSRecordMining.Services
 {
@@ -324,6 +325,46 @@ namespace GSRecordMining.Services
                 }
             }
         }
+        public async Task<Models.ResponseViewModel> checkNASConfig() {
+
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                RecordContext _context = scope.ServiceProvider.GetRequiredService<GSRecordMining.Models.RecordContext>();
+                try
+                {
+                    var nas = await _context.NAS.FirstOrDefaultAsync();
+                    if (nas !=null)
+                    {
+                        
+                        return new ResponseViewModel()
+                        {
+                            statusCode = 200,
+                            message = "",
+                            data = _smbService.IsValidSMB1Connection(nas)
+                        };
+                    }
+                    else
+                    {
+                        return new ResponseViewModel()
+                        {
+                            statusCode = 200,
+                            message = "",
+                            data = false
+                        };
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    return new ResponseViewModel()
+                    {
+                        statusCode = 500,
+                        message = ex.Message,
+                        data = false
+                    };
+                }
+            }
+        }
         public async Task<Models.ResponseViewModel> saveNASConfig(Models.NAS nas)
         {
             using (var scope = _scopeFactory.CreateScope())
@@ -386,19 +427,35 @@ namespace GSRecordMining.Services
             using (var scope = _scopeFactory.CreateScope())
             {
                 RecordContext _context = scope.ServiceProvider.GetRequiredService<GSRecordMining.Models.RecordContext>();
-                
+
                 try
                 {
-                    if (filter != null &&!filter.dStart.HasValue)
+                    if ( filter == null || (filter.Start == "" && filter.End == "") )
                     {
                         return new ResponseViewModel()
                         {
-                            statusCode = 400,
-                            message = "input invalid",
-                            data = ""
+                            statusCode = 200,
+                            message = "Filter falure",
+                            data = new List<string>()
                         };
                     }
-                    var data = await _context.IndexedRecords.ToListAsync();
+                    filter.From = String.IsNullOrEmpty(filter.From) ? "": filter.From.Trim();
+                    filter.To = String.IsNullOrEmpty(filter.To) ? "" : filter.To.Trim();
+                    var data = await _context.IndexedRecords
+                        .Where(c =>
+                        (c.Time >= filter.dStart && c.Time <= filter.dEnd)
+                        &&
+                        (
+                         (filter.From != "" && filter.From == filter.To && (filter.To == c.From || filter.To == c.To))
+                         ||
+                        (
+                        (filter.From == "" || (filter.From != "" && c.From == filter.From))
+                        && (filter.To == "" || (filter.To != "" && c.To == filter.To))
+                        )
+                        )
+
+                        )
+                        .Select(c => c.FilePath).ToListAsync();
                     return new ResponseViewModel()
                     {
                         statusCode = 200,

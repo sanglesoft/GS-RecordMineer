@@ -66,97 +66,85 @@
                         <div class="art-top-bg-overlay"></div>
                     </div>
                     <div class="transition-fade" id="swup">
-                        <div class="container-fluid">
-                            <div class="row justify-content-lg-center
-                                        justify-content-md-center">
-                                <div class="col-12">
-                                    <div class="art-a art-card">
-                                        <h4 class="mb-25"> Grandstream UCM Record Mining </h4>
-                                        <form id="formFilter" class="art-contact-form">
-                                            <hr />
-                                            <div class="row timeRange">
-                                                <div class="col-12 col-lg-6">
-
-                                                    <div class="art-form-field">
-                                                        <input id="Start"
-                                                               name="Start"
-                                                               class="art-input" autocomplete="off"
-                                                               type="text"
-                                                               placeholder="Start">
-                                                        <label for="Start"><i class="fas fa-calendar-days fa-2x"></i></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="art-form-field">
-                                                        <input id="End"
-                                                               name="End"
-                                                               class="art-input" autocomplete="off"
-                                                               type="text"
-                                                               placeholder="End">
-                                                        <label for="End"><i class="fas fa-calendar-days fa-2x"></i></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="ex-inputs-picker"></div>
-                                                </div>
-                                            </div>
-                                            <div class="row numberInOut">
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="art-form-field">
-                                                        <input id="From"
-                                                               name="From"
-                                                               class="art-input" autocomplete="off"
-                                                               type="text"
-                                                               placeholder="From">
-                                                        <label for="From"><i class="fas fa-phone fa-2x"></i></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="art-form-field">
-                                                        <input id="To"
-                                                               name="To"
-                                                               class="art-input" autocomplete="off"
-                                                               type="text"
-                                                               placeholder="To">
-                                                        <label for="To"><i class="fas fa-phone-flip fa-2x"></i></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="art-submit-frame text-right">
-                                                <button class="art-btn
-                                                            art-btn-md
-                                                            art-submit w-100"
-                                                        type="button"
-                                                        id="btn-filter-submit">
-                                                    <i class="fa fa-magnifying-glass"></i>
-                                                    <span></span>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div id="scrollbar" class="art-scroll-frame">
                             <div class="container-fluid">
                                 <div class="row justify-content-lg-center justify-content-md-center">
                                     <div class="col-12">
-                                        <div class="art-a art-card card-application p-0">
-                                            <table class="table
-                                                    table-bordered m-0"
-                                                   id="table-filter">
-                                                <thead>
-                                                    <tr>
-                                                        <th>From</th>
-                                                        <th>To</th>
-                                                        <th>Time</th>
-                                                        <th>Duration</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+                                        <div class="art-a art-card  card-application">
+                                            <form id="formFilter" class="art-contact-form">
+                                                <div class="row timeRange">
+                                                    <div class="col-6">
+
+                                                        <div class="art-form-field">
+                                                            <input id="Start"
+                                                                   name="Start"
+                                                                   class="art-input" autocomplete="off"
+                                                                   type="text"
+                                                                   placeholder="Start">
+                                                            <label for="Start"><i class="fas fa-calendar-days fa-2x"></i></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="art-form-field">
+                                                            <input id="End"
+                                                                   name="End"
+                                                                   class="art-input" autocomplete="off"
+                                                                   type="text"
+                                                                   placeholder="End">
+                                                            <label for="End"><i class="fas fa-calendar-days fa-2x"></i></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="ex-inputs-picker"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row numberInOut">
+                                                    <div class="col-6">
+                                                        <div class="art-form-field">
+                                                            <input id="From"
+                                                                   name="From"
+                                                                   class="art-input" autocomplete="off"
+                                                                   type="text"
+                                                                   placeholder="From">
+                                                            <label for="From"><i class="fas fa-phone fa-2x"></i></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="art-form-field">
+                                                            <input id="To"
+                                                                   name="To"
+                                                                   class="art-input" autocomplete="off"
+                                                                   type="text"
+                                                                   placeholder="To">
+                                                            <label for="To"><i class="fas fa-phone-flip fa-2x"></i></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="art-submit-frame text-right m-0">
+                                                    <button class="art-btn
+                                                            art-btn-md
+                                                            art-submit w-100"
+                                                            type="button"
+                                                            id="btn-filter-submit">
+                                                        <i class="fa fa-magnifying-glass"></i>
+                                                        <span id="FoundCount"></span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <hr />
+                                                <table class="table table-bordered m-0" id="table-filter">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>From</th>
+                                                            <th>To</th>
+                                                            <th>Time</th>
+                                                            <th>Duration</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
                                         </div>
                                     </div>
                                 </div>

@@ -11,16 +11,16 @@ function fillFormNAS() {
         type: "POST",
         url: "/getNASConfig/",
         success: function (result) {
-            console.log(result);
             if (result.statusCode == 200 && result.data.length>0) {
                 $("#form-connect-host").val(result.data[0].host);
                 $("#form-connect-sharename").val(result.data[0].sharename);
                 $("#form-connect-username").val(result.data[0].username);
                 $("#form-connect-password").val(result.data[0].password);
+                filltableFilter_action();
             }
             else {
                 $.toast({
-                    heading: "[Error " + (result.statusCode / 10) + "x] get data failed",
+                    heading: "NAS config not found",
                     text: result.message + (result.data != "" ? ("<br>" + JSON.stringify(result.data)) : ""),
                     icon: 'error',
                     showHideTransition: 'slide',
@@ -43,15 +43,20 @@ function fillFormNAS() {
         }
     });
 }
-
-function filltableFilter() {
+function filltableFilter_action() {
     $.ajax({
         type: "POST",
-        url: "/getFromNAS/",
+        url: "/getIndexedRecord/",
+        data: {
+            Start: $("#Start").val(),
+            End: $("#End").val(),
+            From: $("#From").val(),
+            To: $("#To").val()
+        },
         success: function (result) {
-                console.log(result);
             if (result.statusCode == 200) {
-                $("#tableFilter tbody").html("");
+                $("#table-filter tbody").html("");
+                dataTable = [];
                 result.data.forEach(function (item) {
                     var filename = item.split('\\').pop();
                     dataTable.push({
@@ -63,9 +68,12 @@ function filltableFilter() {
                 });
                 dataTable.sort((a, b) => a.value - b.time);
                 dataTable.reverse();
+
                 dataTable.forEach(function (item) {
                     $("#table-filter tbody").append("<tr><td>" + item.from + "</td><td>" + item.to + "</td><td>" + item.time + "</td><td class=\"cell-durration\"></td><td><a href=\"#\" class=\"art-link btnPlay\" data-id=\"" + toHex(item.path) + "\"><i class=\"fa fa-2x fa-volume-high\" data-id=\"" + toHex(item.path) + "\"></i></a></td></tr>");
                 });
+                $("#FoundCount").text("Found " + dataTable.length + " record");
+
             }
             else {
                 $.toast({
@@ -92,6 +100,40 @@ function filltableFilter() {
         }
     });
 }
+function filltableFilter() {
+    $.ajax({
+        type: "POST",
+        url: "/checkNASConfig/",
+        success: function (result) {
+            if (result.statusCode == 200 && result.data) {
+                filltableFilter_action();
+            }
+            else {
+                $.toast({
+                    heading: "NAS config not found",
+                    text: result.message + (result.data != "" ? ("<br>" + JSON.stringify(result.data)) : ""),
+                    icon: 'error',
+                    showHideTransition: 'slide',
+                    position: 'bottom-right',
+                });
+            }
+        },
+        error: function (result) {
+            console.log(result);
+            $.toast({
+                heading: "Error",
+                text: JSON.stringify(result),
+                icon: 'error',
+                showHideTransition: 'slide',
+                position: 'bottom-right',
+            });
+        },
+        complete: function () {
+
+        }
+    });
+
+}
 function toHex(str) {
     var result = '';
     for (var i = 0; i < str.length; i++) {
@@ -100,8 +142,6 @@ function toHex(str) {
     return result;
 }
 $(document).ready(function () {
-    fillFormNAS();
-    filltableFilter();
     $.ajax({
         type: "POST",
         url: "/isLogin",
@@ -111,6 +151,9 @@ $(document).ready(function () {
             }
             else {
                 $('#login-modal').modal('hide');
+
+
+                fillFormNAS();
             }
         },
         error: function (result) {
@@ -162,6 +205,10 @@ $(document).ready(function () {
             }
         }, 10);
     });
+
+
+    txtStart.value = moment().format('DD/MM/YYYY');
+    txtEnd.value =  moment().format('DD/MM/YYYY');
 
     setInputFilter(document.getElementById("From"), function (value) {
         return /^\d*\.?\d*$/.test(value); 
@@ -254,7 +301,48 @@ $(document).ready(function () {
             },
             success: function (result) {
                 if (result.statusCode == 200) {
-                    
+                    $.ajax({
+                        type: "POST",
+                        url: "/buildIndexedRecord/",
+                        success: function (result) {
+                            if (result.statusCode == 200 ) {
+                                if (result.data.add >= 0) {
+                                    $.toast({
+                                        heading: "Found " + result.data.add +" new record",
+                                        text: "",
+                                        icon: 'success',
+                                        showHideTransition: 'slide',
+                                        position: 'bottom-right',
+                                        afterHidden: function () {
+                                            $('#setting-modal').modal('hide');
+                                        }
+                                    });
+                                }
+                            }
+                            else {
+                                $.toast({
+                                    heading: "[Error " + (result.statusCode / 10) + "x] get data failed",
+                                    text: result.message + (result.data != "" ? ("<br>" + JSON.stringify(result.data)) : ""),
+                                    icon: 'error',
+                                    showHideTransition: 'slide',
+                                    position: 'bottom-right',
+                                });
+                            }
+                        },
+                        error: function (result) {
+                            console.log(result);
+                            $.toast({
+                                heading: "Error",
+                                text: JSON.stringify(result),
+                                icon: 'error',
+                                showHideTransition: 'slide',
+                                position: 'bottom-right',
+                            });
+                        },
+                        complete: function () {
+
+                        }
+                    });
                     $.toast({
                         heading: "NAS connected",
                         text: "",
@@ -290,6 +378,13 @@ $(document).ready(function () {
                 $("#btn-connect-submit").prop("disabled", false);
             }
         });
+    });
+
+    $("#btn-filter-submit").on("click", function () {
+        $("#btn-filter-submit").prop("disabled", true);
+        filltableFilter();
+        $("#btn-filter-submit").prop("disabled", false);
+        
     });
 
 });

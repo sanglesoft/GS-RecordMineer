@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using CSCore;
 using CSCore.Codecs.WAV;
+using System.Globalization;
 
 namespace GSRecordMining.Models
 {
@@ -10,11 +11,19 @@ namespace GSRecordMining.Models
     {
         public RecordContext()
         {
-            if(Directory.Exists(DBDirectory()))
+            try
             {
-                Directory.CreateDirectory(DBDirectory());
+
+                if (!Directory.Exists(DBDirectory()))
+                {
+                    Directory.CreateDirectory(DBDirectory());
+                }
+                Database.EnsureCreated();
+
             }
-            Database.EnsureCreated();
+            catch
+            {
+            }
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
@@ -64,15 +73,21 @@ namespace GSRecordMining.Models
     }
     public class Filter
     {
-        public DateTime? dStart { get {
-            return DateTime.MinValue; 
+        public DateTime dStart { get {
+                DateTime _out ;
+             if( !  DateTime.TryParseExact(Start, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,out _out))
+                _out = DateTime.MinValue;
+                    return _out.Date; 
             
             } }
-        public DateTime? dEnd
+        public DateTime dEnd
         {
             get
             {
-                return DateTime.MinValue;
+                DateTime _out ;
+                if (!DateTime.TryParseExact(End, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _out))
+                    _out = dStart;
+                return _out.Date.AddDays(1);
 
             }
         }

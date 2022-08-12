@@ -1045,11 +1045,16 @@ blockquote {
 .art-info-bar .art-applications {
     min-height: calc(100vh - 351px);
 }
-
-    .art-info-bar .art-applications .art-applications-item {
-        margin-bottom: 15px;
-        position: relative;
+@media (max-width: 920px)
+{
+    .art-info-bar .art-applications {
+        min-height: calc(100vh - 321px);
     }
+}
+.art-info-bar .art-applications .art-applications-item {
+    margin-bottom: 15px;
+    position: relative;
+}
 
         .art-info-bar .art-applications .art-applications-item .art-skill-heading {
             display: -webkit-box;
@@ -3034,12 +3039,14 @@ html.is-animating .fade-left {
     z-index: -20;
     transform: translateX(-50%);
     transition: all 0.25s;
+    display:none;
 }
 
-.ex-inputs-picker-visible {
-    opacity: 1;
-    z-index: 1000;
-}
+    .ex-inputs-picker.ex-inputs-picker-visible {
+        opacity: 1;
+        z-index: 1000;
+        display: block;
+    }
 
 @media (max-width: 616px), (max-height: 480px) {
     .ex-inputs-start,

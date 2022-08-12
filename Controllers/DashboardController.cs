@@ -63,7 +63,14 @@ namespace GSRecordMining.Controllers
         }
 
         [Authorize]
-        [HttpPost,HttpGet]
+        [HttpPost]
+        public async Task<JsonResult> checkNASConfig()
+        {
+            return Json(await _dbService.checkNASConfig());
+        }
+        
+        [Authorize]
+        [HttpPost]
         public async Task<JsonResult> getNASConfig()
         {
             return Json(await _dbService.getNASConfig());
@@ -76,13 +83,13 @@ namespace GSRecordMining.Controllers
             return Json(await _dbService.saveNASConfig(nas));
         }
         [Authorize]
-        [HttpPost, HttpGet]
+        [HttpPost]
         public async Task<JsonResult> getIndexedRecord(Models.Filter? filter)
         {
             return Json(await _dbService.getIndexedRecord(filter));
         }
         [Authorize]
-        [HttpPost,HttpGet]
+        [HttpPost]
         public async Task<JsonResult> buildIndexedRecord()
         {
             return Json(await _dbService.buildIndexedRecord());
