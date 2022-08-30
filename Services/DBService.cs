@@ -378,16 +378,11 @@ namespace GSRecordMining.Services
                     nas.Sharename = nas.Sharename == null ? "" : nas.Sharename;
                     if (nas.Host !=""&&nas.Sharename!=""&&_smbService.IsValidSMB1Connection(nas))
                     {
-                        if (_context.NAS.Any())
-                        {
-                            _context.NAS.Update(nas);
+                        _context.NAS.RemoveRange(_context.NAS.ToList());
+                        await _context.SaveChangesAsync();
+
+                        _context.NAS.Add(nas);
                             await _context.SaveChangesAsync();
-                        }
-                        else
-                        {
-                            _context.NAS.Add(nas);
-                            await _context.SaveChangesAsync();
-                        }
                         return new ResponseViewModel()
                         {
                             statusCode = 200,

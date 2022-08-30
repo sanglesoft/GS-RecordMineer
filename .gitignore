@@ -1,0 +1,7 @@
+publish/AppData/IndexedRecord.db
+publish/GSRecordMining.pdb
+publish/appsettings.json
+publish/appsettings.Development.json
+publish/web.config
+obj/*
+bin/*
